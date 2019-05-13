@@ -16,15 +16,20 @@ _zsh_pyenv_load() {
     # export PATH
     export PATH="$PYENV_HOME/bin:$PATH"
 
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+    eval "$(command pyenv init -)"
+    eval "$(command pyenv virtualenv-init -)"
+    
+    # call the actual pyenv function
+    pyenv "$@"
 }
 
-# install pyenv if it isnt already installed
-[[ ! -f "$PYENV_HOME/libexec/pyenv" ]] && _zsh_pyenv_install
 
-# load pyenv if it is installed
-if [[ -f "$PYENV_HOME/libexec/pyenv" ]]; then
-    _zsh_pyenv_load
-fi
-
+# Wrap the pyenv function so that pyenv is loaded lazily
+pyenv() {
+	# install pyenv if it isnt already installed
+	[[ ! -f "$PYENV_HOME/libexec/pyenv" ]] && _zsh_pyenv_install
+	# load pyenv if it is installed
+	if [[ -f "$PYENV_HOME/libexec/pyenv" ]]; then
+	    _zsh_pyenv_load
+	fi
+}
