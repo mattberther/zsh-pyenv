@@ -30,7 +30,7 @@ zplug "mattberther/zsh-pyenv"
 Include the load command in your `.zshrc`
 
 ```
-zget load mattberther/zsh-pyenv
+zgen load mattberther/zsh-pyenv
 ```
 
 ### As an [Oh My ZSH!](https://github.com/robbyrussell/oh-my-zsh) custom plugin
