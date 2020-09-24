@@ -2,6 +2,9 @@ GITHUB="https://github.com"
 
 [[ -z "$PYENV_HOME" ]] && export PYENV_HOME="$HOME/.pyenv"
 
+# export PATH
+export PATH="$PYENV_HOME/bin:$PATH"
+
 _zsh_pyenv_install() {
     echo "Installing pyenv..."
     git clone "${GITHUB}/pyenv/pyenv.git"            "${PYENV_HOME}"
@@ -13,9 +16,6 @@ _zsh_pyenv_install() {
 }
 
 _zsh_pyenv_load() {
-    # export PATH
-    export PATH="$PYENV_HOME/bin:$PATH"
-
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 }
